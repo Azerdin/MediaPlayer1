@@ -1,18 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    android:orientation="vertical"
+    android:background="@color/grey"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/title"
+        android:textSize="20pt"
+        android:layout_marginBottom="40dp"
+        android:layout_weight="0.8"
+        android:textAlignment="center"
+        android:textColor="@color/lightgrey"
+        />
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:background="@drawable/list"
+            android:id="@+id/list"
 
-</android.support.constraint.ConstraintLayout>
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="241dp"
+        android:layout_height="244dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp"
+        android:background="@drawable/main"
+
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textSize="15pt"
+        android:textAlignment="center"
+        android:textColor="@color/lightgrey"
+        android:id="@+id/songName"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:textAlignment="viewEnd"
+            android:id="@+id/currentlyTime"
+            />
+        <SeekBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:id="@+id/seekbar"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:id="@+id/fullTime"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:background="@drawable/previus"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="0.2"
+        android:id="@+id/previous"
+        android:onClick="previous"
+
+        />
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:background="@drawable/pause"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.2"
+            android:id="@+id/pause"
+            />
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:background="@drawable/stop"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.2"
+            android:id="@+id/stop"
+            />
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:background="@drawable/next"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.2"
+            android:id="@+id/next"
+            android:onClick="next"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
