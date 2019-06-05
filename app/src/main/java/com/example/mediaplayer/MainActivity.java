@@ -31,8 +31,8 @@ public static int [] songs = {R.raw.queen, R.raw.back, R.raw.hell, R.raw.bell, R
 public String [] nameSong = {
         "Queen We will rock you",
         "AC DC Back in Black",
-        "AC DC Hells Bell",
         "AC DC Highway to hell",
+        "AC DC Hells Bell",
         "AC DC Thunderstruck"
 };
     @Override
@@ -64,7 +64,10 @@ public String [] nameSong = {
         list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent();
+                Intent i = new Intent(MainActivity.this, list.class);
+                oneTimeOnly = 0;
+                mediaPlayer.seekTo(0);
+                mediaPlayer.pause();
                 startActivity(i);
             }
         });
@@ -87,7 +90,7 @@ public String [] nameSong = {
                     ftime.setText(String.format("%d M %d s", TimeUnit.MILLISECONDS.toMinutes((long) fullTime), (TimeUnit.MILLISECONDS.toSeconds((long) fullTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) fullTime)))));
 
                     seekbar.setProgress((int) startTime);
-                    handler.postDelayed(UpdateSongTime, 1000);
+                    handler.postDelayed(UpdateSongTime, 0);
                 }
                 else
                 {
@@ -119,21 +122,12 @@ public String [] nameSong = {
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if(progress != 0)
+                if(fromUser)
                 {
 
                     mediaPlayer.seekTo(progress);
 
-                    seekbar.setProgress(progress);
-                    currenttime.setText(String.format("%d M %d s",
-                            TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                            TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
-                                            toMinutes((long) startTime)))
-                    );
                 }
-
-
             }
 
             @Override
@@ -144,6 +138,15 @@ public String [] nameSong = {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+
+                id++;
+                id = id%5;
+                changeMusic(id);
             }
         });
     }
@@ -157,14 +160,9 @@ public String [] nameSong = {
                                     toMinutes((long) startTime)))
             );
             seekbar.setProgress((int)startTime);
-            if(seekbar.getProgress() == seekbar.getMax())
-            {
-                id++;
-                id = id%5;
-                changeMusic(id);
-            }
 
-            handler.postDelayed(this, 1000);
+
+            handler.postDelayed(this, 100);
 
         }
     };
@@ -183,6 +181,7 @@ public String [] nameSong = {
     }
     public void changeMusic(int id)
     {
+        oneTimeOnly = 0;
         mediaPlayer.seekTo(0);
         mediaPlayer.pause();
         startTime = 0;
@@ -191,5 +190,7 @@ public String [] nameSong = {
         songName.setText(nameSong[id]);
         mediaPlayer.start();
         fullTime = mediaPlayer.getDuration();
+        seekbar.setMax((int) fullTime);
+        ftime.setText(String.format("%d M %d s", TimeUnit.MILLISECONDS.toMinutes((long) fullTime), (TimeUnit.MILLISECONDS.toSeconds((long) fullTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) fullTime)))));
     }
 }
